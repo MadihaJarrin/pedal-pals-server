@@ -51,6 +51,14 @@ async function run() {
             const product = await productsCollection.findOne(query);
             res.json(product);
         })
+        //Delete Order
+        app.delete('/deleteProducts/:id', async (req, res) => {
+            console.log(req.params.id);
+            const result = await productsCollection.deleteOne({
+                _id: ObjectId(req.params.id),
+            });
+            res.send(result);
+        })
 
         //ADD ORDER Product
         app.post('/addOrder', async (req, res) => {
@@ -77,6 +85,7 @@ async function run() {
             });
             res.send(result);
         })
+
 
         //POST reviews API
         app.post('/reviews', async (req, res) => {
